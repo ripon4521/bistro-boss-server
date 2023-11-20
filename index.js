@@ -31,8 +31,17 @@ async function run() {
 
     const menuCollectyion = client.db("bistroDb").collection("menu");
     const reviwesCollectyion = client.db("bistroDb").collection("reviews");
+    const cartCollectyion = client.db("bistroDb").collection("carts");
 
 
+    /**
+     * ********************
+     * Get Operation Start
+     * ********************
+     */
+  
+
+   
     app.get('/menu' , async(req , res)=>{
         try {
             const result = await menuCollectyion.find().toArray();
@@ -52,6 +61,35 @@ async function run() {
         }
 
     })
+
+
+    /**
+     * ********************
+     * Get Operation End
+     * ********************
+     */
+
+
+
+/**
+     * ********************
+     * Post Operation Start
+     * ********************
+     */
+
+app.post('/carts', async(req , res)=>{
+    const cartItem = req.body;
+    const result = await cartCollectyion.insertOne(cartItem)
+    res.send(result)
+
+})
+
+
+/**
+     * ********************
+     * Get Operation End
+     * ********************
+     */
 
 
 
