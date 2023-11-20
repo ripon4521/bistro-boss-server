@@ -30,11 +30,22 @@ async function run() {
     await client.connect();
 
     const menuCollectyion = client.db("bistroDb").collection("menu");
+    const reviwesCollectyion = client.db("bistroDb").collection("reviews");
 
 
     app.get('/menu' , async(req , res)=>{
         try {
             const result = await menuCollectyion.find().toArray();
+            res.send(result)
+        } catch (error) {
+            console.log(error);
+        }
+
+    })
+
+    app.get('/reviews' , async(req , res)=>{
+        try {
+            const result = await reviwesCollectyion.find().toArray();
             res.send(result)
         } catch (error) {
             console.log(error);
@@ -63,6 +74,9 @@ app.get('/', (req, res) => {
     }
  
 })
+
+
+
 
 app.listen(port, () => {
   console.log(`Bistro Boss Server is Running On: ${port}`)
