@@ -118,7 +118,28 @@ try {
    })
 
 
-// / **** Delete Operation Start ****************
+   app.delete('/users/:_id', async(req,res)=>{
+    const id = req.params._id;
+    const query = {_id : new ObjectId(id)}
+    const result = await usersCollectyion.deleteOne(query)
+    res.send(result)
+   })
+
+
+// / **** Delete Operation end ****************
+
+// / **** Patch Operation Start ****************
+app.patch('/users/admin/:_id', async(req ,res)=>{
+    const id = req.params._id;
+    const filter = {_id : new ObjectId(id)};
+    const updatedDoc = {
+         $set:{
+            role:'admin'
+         }
+    }
+    const result = await usersCollectyion.updateOne(filter, updatedDoc)
+    res.send(result)
+})
      
 
 
